@@ -1,0 +1,48 @@
+@mixin setDefault {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+
+
+
+
+@mixin centerElement {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@mixin aroundElement {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+@mixin mediaQuerry ($point){
+    @if $point==mobile {
+        @media screen and (max-width:762px){
+            @content;
+        }
+    }
+    @else if $point == tablette {
+        @media screen and (max-width:1200px){
+            @content;
+        }
+    }
+    @else {
+        @content;
+    }
+}
+
+
+@mixin setBgColor ($color,$op){
+    background-color: rgba($color,$op);
+}
+@mixin setDimention($width,$height) {
+    width: $width;
+    height: $height;
+}
+@mixin setRounding ($value) {
+    border-radius: $value;
+}
+

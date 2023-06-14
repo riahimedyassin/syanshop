@@ -1,0 +1,14 @@
+Fetch General Product ; 
+Filter Proucts : Category Filter ;
+
+Create User :
+	-Login 	
+	-Get Cart : 
+		-CRUD
+	-Add To WishList
+Create Admin : 
+	-Login 
+	-Get All Carts :
+		-CRUD
+	-Add New Product 
+	

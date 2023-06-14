@@ -1,0 +1,19 @@
+@use '../mixin/mixin' as * ; 
+
+%boxShadow {
+    box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.179);
+}
+%defaultButton {
+    width: 150px;
+    height: 60px;
+    @include setRounding(16px);
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+%transtion {
+    transition: 0.2s;
+}
+%breakFlex {
+    flex-wrap: wrap;
+}

@@ -1,0 +1,200 @@
+@use '../../sass/functions/functions' as *;
+@use '../../sass/helpers/helpers' as *;
+@use '../../sass/mixin/mixin' as *;
+@use '../../sass/variables/colors' as * ;
+@use '../../sass/variables/spacing' as * ;
+* {
+    @include setDefault ;
+}
+.hidden {
+    display: none ;
+}
+nav {
+    @include setDimention(100%,80px); 
+    @include aroundElement;
+    @include setBgColor($secondColor,0.75);
+    @include mediaQuerry (mobile) {
+        & {
+            padding: 10px;
+            a,.input {
+                display: none;
+            }
+            
+        }
+    }
+    position: relative;
+    
+    ul {
+        left: 130px;
+        top: 80px;
+        position: absolute;
+        li {
+            background-color: $secondColor;
+            list-style-type: none;
+            padding: $paddingSmall;
+            cursor: pointer;
+            &:hover {
+                @include setBgColor(gray,1)
+            }
+        }
+    }
+    padding: 0 80px ;
+    a ,p{
+        cursor: pointer;
+        text-decoration: none;
+        color: black;
+        font-size: 1.1rem;
+        @extend %transtion;
+        &:hover {
+            @include setRounding(12px);
+            outline: 3px solid $mainColor; 
+        }
+    }
+    div {
+        @include setDimention(100px,100%);
+        @include aroundElement;
+        flex-direction: row-reverse;
+        img {
+            @include setDimention(30px,30px);
+            margin-right: $marginElement;
+        }
+    }
+    input {
+        @include setDimention(300px,40px);
+        @include setRounding (12px);
+        border: none;
+        &:focus {
+            outline: none
+        }
+    }
+    .input {
+        @include setBgColor(white,1);
+        @include setDimention(300px,40px);
+        @include setRounding(12px);
+        flex-direction: row;
+        img {
+            @include setDimention(20px,20px);
+            
+        }
+    }
+
+}
+header {
+    @include aroundElement;
+    @include setBgColor($mainColor,1);
+    color: white;
+    @include setDimention(100%,30px); 
+    @include mediaQuerry (mobile) {
+        & {
+            h4 {
+                font-size: 0.5rem
+            }
+        }
+    }
+}
+.welcomeSection {
+    @include setDimention(100%,400px);
+    @include aroundElement;
+    @include setBgColor($bgColor,1);
+    @include setRounding (16px);
+    @extend %boxShadow;
+    h1 {
+        font-size: 2rem;
+    }
+    .left {
+        @include centerElement;
+        flex-direction: column;
+        button {
+            margin-top:$marginElement;
+            @include setRounding(32px)
+        }
+    }
+    .right {
+        img {
+            @include setDimention(400px,500px); 
+            
+        }
+    }
+    @include mediaQuerry (mobile) {
+        & {
+            @include setDimention(100%,auto);
+            flex-direction: column-reverse;
+            .right  {
+                img {
+                    @include setDimention(150px,200px)
+                }  
+            }
+            .left {
+                h1 {
+                    font-size: 1.1rem;
+                }
+                button {
+                    @include setDimention(100px,50px);
+                    font-size: 1rem;
+                    margin-top: $marginElement;
+                }
+            }
+        }
+    }
+}
+.container {
+    margin: 80px;
+    @include mediaQuerry (mobile) {
+        margin: 10vw
+    }
+}
+button {
+    @extend %defaultButton;
+    @include setBgColor($mainColor,1);
+    color: white;
+    font-size: 1.2rem;
+
+}
+.resRender {
+    @include aroundElement ; 
+    @extend %breakFlex; 
+    width: 100%;
+    margin-top: $marginSection;
+    div {
+        @include setDimention(400px,450px);
+        flex-direction: column;
+        @include centerElement;
+        margin : 36px;
+        border: 2px solid black;
+        padding: $paddingSmall;
+        @include setRounding(12px);
+
+        img {
+            @include setDimention(100px,150px);
+            @include setBgColor($bgColor,1);
+            margin: $marginElement;
+        }
+        div {
+            @include setDimention(100%,auto);
+            @include centerElement;
+            flex-direction: inherit;
+            flex-wrap: nowrap;
+            border: none;
+            margin: $marginElement;
+            h3 {
+                font-size: 1.1rem;
+            }
+        }
+        button {
+            margin: 16px;
+            @extend %defaultButton ; 
+            @include setDimention(100px,40px);
+            @include setRounding(12px);
+            border: 3px solid $mainColor;
+            font-size: 0.8rem;
+            @extend %transtion;
+            color: $mainColor;
+            @include setBgColor(white,1);
+            &:hover{
+                @include setBgColor($mainColor,1);
+                color: white;
+                
+            }
+        }
+    }
+}
