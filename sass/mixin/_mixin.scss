@@ -46,3 +46,7 @@
     border-radius: $value;
 }
 
+@mixin defaultLink ($color) {
+    text-decoration: none;
+    color: $color;
+}
