@@ -50,3 +50,21 @@
     text-decoration: none;
     color: $color;
 }
+@mixin setMarginPadding($marg,$side,$pad) {   
+    // Possible Values : All , Bottom , Left , Right , Top  
+    @if $side == "all" {
+        margin: $marg;
+    }
+    @else {
+        margin-#{$side}:$marg;
+    }
+    padding:$pad;
+}
+@mixin defaultInput ($width,$height,$round) {
+    @include setDimention($width,$height);
+    @include setRounding ($round);
+    border: none;
+        &:focus {
+            outline: none;
+    }
+}

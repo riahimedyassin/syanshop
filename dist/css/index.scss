@@ -6,6 +6,27 @@
 * {
     @include setDefault ;
 }
+body {
+    position: relative;
+    .cart {
+        position: absolute;
+        @include setDimention(400px,200px);
+        @include setRounding(16px);
+        @include setBgColor(white,1);
+        z-index: 1;
+        @include setMarginPadding(0px,"all",$paddingLarge);
+        top: 100px;
+        right: 5vw;
+        .cartRender {
+            div {
+                @include setDimention(400px,100px);
+                img {
+                    @include setDimention(50px,50px);
+                }
+            }
+        }
+    }
+}
 .hidden {
     display: none ;
 }
@@ -66,24 +87,16 @@ nav {
         }
     }
     input {
-        @include setDimention(300px,40px);
-        @include setRounding (12px);
-        border: none;
-        &:focus {
-            outline: none;
-        }
+        @include defaultInput(300px,40px,12px);
     }
     .input {
         @include setBgColor(white,1);
-        @include setDimention(300px,40px);
-        @include setRounding(12px);
+        @include defaultInput(300px,40px,12px);
         flex-direction: row;
         img {
             @include setDimention(20px,20px);
-            
         }
     }
-
 }
 header {
     @include aroundElement;
@@ -148,6 +161,16 @@ header {
     @include mediaQuerry (mobile) {
         margin: 10vw
     }
+    .productHeader {
+        @include setBgColor($thirdColor,1);
+        @include setRounding(12px);
+        @include setMarginPadding($marginSection,"top",$paddingSmall);
+        @include aroundElement;
+        select {
+            @include defaultInput(300px,40px,12px);
+        }
+    }
+    
 }
 button {
     @extend %defaultButton;
@@ -160,14 +183,13 @@ button {
     @include aroundElement ; 
     @extend %breakFlex; 
     width: 100%;
-    margin-top: $marginSection;
+    @include setMarginPadding($marginSection,"top",0);
     div {
         @include setDimention(400px,450px);
         flex-direction: column;
         @include centerElement;
-        margin : 36px;
+        @include setMarginPadding(36px,"all",$paddingSmall);
         border: 2px solid $mainColor;
-        padding: $paddingSmall;
         @include setRounding(12px);
 
         img {
