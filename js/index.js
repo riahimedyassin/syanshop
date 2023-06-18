@@ -1,3 +1,6 @@
+import { clearPrevious } from "./ClearPrevious.js";
+import { initLocal } from "./LocalStorage.js";
+import { displayCart, setLocal } from "./Cart.js";
 var displayData = function (el) {
     var myRender = document.querySelector(".resRender");
     var myHolder = document.createElement("div");
@@ -27,81 +30,27 @@ var fetchData = function (urlParam) {
     fetch(url)
         .then(function (res) { return res.json(); })
         .then(function (data) {
-        clearPrevious();
+        clearPrevious("resRender");
         data.map(function (el) { return displayData(el); });
     })
         .then(function () {
         eventListnnerCart();
     })["catch"](function (err) { return console.log(err); });
 };
-var clearPrevious = function () {
-    var myRender = document.querySelector(".resRender");
-    myRender.innerHTML = "";
-};
-var fetchCategories = function () {
-    var myCategories = document.querySelector("#categorieFilter");
-    var myCategValue = myCategories.value;
-    if (myCategValue != "all") {
-        var myUrl = "https://fakestoreapi.com/products/category/".concat(parser(myCategValue));
-        fetchData(myUrl);
-    }
-    else {
-        fetchData("https://fakestoreapi.com/products");
-    }
-};
-var parser = function (url) {
-    return url.replace(" ", "%20");
-};
-//LOCAL STORAGE
-var initLocal = function () {
-    if (!localStorage.cart) {
-        localStorage.setItem("cart", JSON.stringify([]));
-    }
-};
-var getLocal = function () {
-    var myLocal = JSON.parse(localStorage.cart);
-    if (!myLocal) {
-        initLocal();
-        return [];
-    }
-    return myLocal;
-};
-var setLocal = function (event) {
-    if (event.parentElement) {
-        var myLocal = getLocal();
-        var id_1 = event.parentElement.getAttribute("id");
-        var test = myLocal.some(function (el) {
-            el.id == id_1;
-        });
-        if (!test) {
-            var myProduct = {
-                id: event.parentElement.getAttribute("id"),
-                title: event.parentElement.children[1].children[0].innerHTML,
-                price: event.parentElement.children[1].children[1].innerHTML,
-                image: event.parentElement.children[0].src
-            };
-            myLocal.push(myProduct);
-            localStorage.cart = JSON.stringify(myLocal);
-            displayCart(myLocal);
-        }
-    }
-};
-var displayCart = function (table) {
-    table.map(function (data) {
-        var myRender = document.querySelector(".cartRender");
-        var myTitle = document.createElement("h4");
-        var myPrice = document.createElement("p");
-        var myImage = document.createElement("img");
-        var myHolder = document.createElement("div");
-        myTitle.innerHTML = data.title;
-        myPrice.innerHTML = data.price;
-        myImage.src = data.image;
-        myHolder.appendChild(myImage);
-        myHolder.appendChild(myTitle);
-        myHolder.appendChild(myPrice);
-        myRender.appendChild(myHolder);
-    });
-};
+// const fetchCategories=():void => {
+//     let myCategories = document.querySelector("#categorieFilter") as HTMLSelectElement; 
+//     let myCategValue=myCategories.value;
+//     if (myCategValue!="all") {
+//         let myUrl = `https://fakestoreapi.com/products/category/${parser(myCategValue)}`;
+//         fetchData(myUrl);
+//     }
+//     else {
+//         fetchData("https://fakestoreapi.com/products")
+//     }
+// }
+// const parser=(url : string) : string => {
+//     return url.replace(" ","%20")
+// }
 //Calls 
 document.body.onload = function () {
     fetchData("https://fakestoreapi.com/products");
@@ -121,3 +70,9 @@ var eventListnnerCart = function () {
         });
     });
 };
+//CART TOGGLE ; 
+var myCart = document.querySelector(".cart");
+var myCartToggler = document.querySelector(".cartToggler");
+myCartToggler === null || myCartToggler === void 0 ? void 0 : myCartToggler.addEventListener("click", function () {
+    myCart === null || myCart === void 0 ? void 0 : myCart.classList.toggle("hidden");
+});

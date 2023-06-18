@@ -6,11 +6,16 @@
 * {
     @include setDefault ;
 }
+.hidden {
+    display: none;
+}
 body {
     position: relative;
     .cart {
         position: absolute;
-        @include setDimention(400px,200px);
+        max-width: 400px;
+        min-height: 200px;
+        overflow-x: hidden;
         @include setRounding(16px);
         @include setBgColor(white,1);
         z-index: 1;
@@ -18,6 +23,7 @@ body {
         top: 100px;
         right: 5vw;
         .cartRender {
+            overflow: scroll;
             div {
                 @include setDimention(400px,100px);
                 img {
@@ -31,6 +37,9 @@ body {
     display: none ;
 }
 nav {
+    .cartToggler {
+        cursor: pointer
+    }
     @include setDimention(100%,80px); 
     @include aroundElement;
     @include setBgColor($secondColor,0.75);

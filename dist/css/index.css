@@ -30,13 +30,18 @@ nav, nav a, nav p, .resRender div button {
   font-family: "Poppins", sans-serif;
 }
 
+.hidden {
+  display: none;
+}
+
 body {
   position: relative;
 }
 body .cart {
   position: absolute;
-  width: 400px;
-  height: 200px;
+  max-width: 400px;
+  min-height: 200px;
+  overflow-x: hidden;
   border-radius: 16px;
   background-color: white;
   z-index: 1;
@@ -44,6 +49,9 @@ body .cart {
   padding: 12px;
   top: 100px;
   right: 5vw;
+}
+body .cart .cartRender {
+  overflow: scroll;
 }
 body .cart .cartRender div {
   width: 400px;
@@ -74,6 +82,9 @@ nav {
   top: 0;
   left: 0;
   padding: 0 80px;
+}
+nav .cartToggler {
+  cursor: pointer;
 }
 @media screen and (max-width: 762px) {
   nav {
