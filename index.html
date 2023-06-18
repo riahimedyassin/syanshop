@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing IO</title>
+    <title>Syan Store</title>
     <link rel="stylesheet" href="dist/css/index.css">
 </head>
 <body>
+    <div class="cart hidden">
+        <h4>Your Cart</h4>
+        <div class="cartRender">
+
+        </div>
+    </div>
     <header>
         <h4>Dev : Riahi Yassin</h4>
-        <h4>Contact US | riahiyassintl101@gmail.com</h4>
+        <h4>Contact US | riahimohamedyassin@gmail.com</h4>
         <h4>Soukra</h4>
     </header>
     <nav class="">
@@ -31,7 +37,7 @@
             <h4>Account</h4>
             <img src="./src/icons/account.png" alt="" class="icon">
         </div>
-        <div >
+        <div class="cartToggler">
             <h4>Cart</h4>
             <img src="./src/icons/cart.png" alt="" class="icon">
         </div>
@@ -39,7 +45,7 @@
     <main class="container">
         <section class="welcomeSection">
             <div class="left">
-                <h1>Grab UpTo 50% Off On <br> Selected Headphone</h1>
+                <h1 id="typedText">Grab UpTo 50% Off On <br>Selected Headphone</h1>
                 <button>Buy Now</button>
             </div>
             <div class="right">
@@ -47,6 +53,17 @@
             </div>
 
         </section>
+        <div class="productHeader">
+            <h1>Hot Sales</h1>
+            <select name="" id="categorieFilter" onchange="fetchCategories()">
+                <option value="all">All</option>
+                <option value="electronics">Electronics</option>
+                <option value="jewelery">Jewelery</option>
+                <option value="men's clothing">Men's clothing</option>
+                <option value="women's clothing">Women's clothing</option>
+            </select>
+        </div>
+        <!-- render products -->
         <section class="resRender">
 
         </section>
@@ -56,5 +73,6 @@
     </footer>
     
 </body>
-<script src="./dist/javascript/index.js"></script>
+<script src="./dist/javascript/index.js" type="module"></script>
+
 </html>

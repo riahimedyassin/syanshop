@@ -34,6 +34,38 @@ nav, nav a, nav p, .resRender div button {
   display: none;
 }
 
+body {
+  position: relative;
+}
+body .cart {
+  position: absolute;
+  max-width: 400px;
+  min-height: 200px;
+  overflow-x: hidden;
+  border-radius: 16px;
+  background-color: white;
+  z-index: 1;
+  margin: 0px;
+  padding: 12px;
+  top: 100px;
+  right: 5vw;
+}
+body .cart .cartRender {
+  overflow: scroll;
+}
+body .cart .cartRender div {
+  width: 400px;
+  height: 100px;
+}
+body .cart .cartRender div img {
+  width: 50px;
+  height: 50px;
+}
+
+.hidden {
+  display: none;
+}
+
 nav {
   width: 100%;
   height: 80px;
@@ -50,6 +82,9 @@ nav {
   top: 0;
   left: 0;
   padding: 0 80px;
+}
+nav .cartToggler {
+  cursor: pointer;
 }
 @media screen and (max-width: 762px) {
   nav {
@@ -121,10 +156,14 @@ nav .input {
   width: 300px;
   height: 40px;
   border-radius: 12px;
+  border: none;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+}
+nav .input:focus {
+  outline: none;
 }
 nav .input img {
   width: 20px;
@@ -223,6 +262,29 @@ header {
     margin: 10vw;
   }
 }
+.container .productHeader {
+  background-color: #e4efe7;
+  border-radius: 12px;
+  margin-top: 128px;
+  padding: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.container .productHeader select {
+  width: 300px;
+  height: 40px;
+  border-radius: 12px;
+  border: none;
+}
+.container .productHeader select:focus {
+  outline: none;
+}
 
 button {
   background-color: #064420;
@@ -241,6 +303,7 @@ button {
           align-items: center;
   width: 100%;
   margin-top: 128px;
+  padding: 0;
 }
 .resRender div {
   width: 400px;
@@ -259,8 +322,8 @@ button {
       -ms-flex-align: center;
           align-items: center;
   margin: 36px;
-  border: 2px solid #064420;
   padding: 8px;
+  border: 2px solid #064420;
   border-radius: 12px;
 }
 .resRender div img {

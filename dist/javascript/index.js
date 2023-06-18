@@ -1,4 +1,6 @@
-"use strict";
+import { clearPrevious } from "./ClearPrevious.js";
+import { initLocal } from "./LocalStorage.js";
+import { displayCart, setLocal } from "./Cart.js";
 const displayData = (el) => {
     let myRender = document.querySelector(".resRender");
     let myHolder = document.createElement("div");
@@ -19,25 +21,59 @@ const displayData = (el) => {
     myHolder.appendChild(myDescreption);
     let myButton = document.createElement("button");
     myButton.innerHTML = "Add To Cart";
+    myButton.classList.add("addToCart");
     myHolder.appendChild(myButton);
     myHolder.setAttribute("id", el.id.toString());
 };
-const fetchData = () => {
-    const url = "https://fakestoreapi.com/products";
+const fetchData = (urlParam) => {
+    const url = urlParam;
     fetch(url)
         .then(res => res.json())
         .then(data => {
+        clearPrevious("resRender");
         data.map((el) => displayData(el));
+    })
+        .then(function () {
+        eventListnnerCart();
     })
         .catch(err => console.log(err));
 };
-const clearPrevious = () => {
-    let myRender = document.querySelector(".resRender");
-    myRender.innerHTML = "";
+// const fetchCategories=():void => {
+//     let myCategories = document.querySelector("#categorieFilter") as HTMLSelectElement; 
+//     let myCategValue=myCategories.value;
+//     if (myCategValue!="all") {
+//         let myUrl = `https://fakestoreapi.com/products/category/${parser(myCategValue)}`;
+//         fetchData(myUrl);
+//     }
+//     else {
+//         fetchData("https://fakestoreapi.com/products")
+//     }
+// }
+// const parser=(url : string) : string => {
+//     return url.replace(" ","%20")
+// }
+//Calls 
+document.body.onload = () => {
+    fetchData("https://fakestoreapi.com/products");
+    initLocal();
+    displayCart(JSON.parse(localStorage.cart));
 };
-document.body.onload = fetchData;
 let myCategories = document.querySelector("#categories");
 myCategories.addEventListener("click", () => {
     let myList = document.querySelector(".categories");
     myList.classList.toggle("hidden");
+});
+const eventListnnerCart = () => {
+    let myAddToCart = document.querySelectorAll(".addToCart");
+    myAddToCart.forEach(el => {
+        el.addEventListener("click", (el) => {
+            setLocal(el.target);
+        });
+    });
+};
+//CART TOGGLE ; 
+const myCart = document.querySelector(".cart");
+const myCartToggler = document.querySelector(".cartToggler");
+myCartToggler === null || myCartToggler === void 0 ? void 0 : myCartToggler.addEventListener("click", () => {
+    myCart === null || myCart === void 0 ? void 0 : myCart.classList.toggle("hidden");
 });

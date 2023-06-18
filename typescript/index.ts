@@ -1,15 +1,7 @@
-type Product = {
-    id:number;
-    category : string ;
-    description: string ; 
-    price : number ; 
-    rating : {
-        rate : number ; 
-        count :number ;
-    }
-    image : string ; 
-    title : string ; 
-}
+import { clearPrevious } from "./ClearPrevious.js"
+import { Cart , Product} from "./Types.js";
+import { initLocal , getLocal } from "./LocalStorage.js";
+import { displayCart ,setLocal} from "./Cart.js";
 const displayData=(el:Product):void => {
     let myRender=document.querySelector(".resRender") as HTMLDivElement;
     let myHolder = document.createElement("div") as HTMLDivElement;
@@ -30,27 +22,67 @@ const displayData=(el:Product):void => {
     myHolder.appendChild(myDescreption);
     let myButton=document.createElement("button") as HTMLButtonElement;
     myButton.innerHTML="Add To Cart";
+    myButton.classList.add("addToCart")
     myHolder.appendChild(myButton);
     myHolder.setAttribute("id",el.id.toString());
 
 }
-const fetchData =() : void => {
-    const url : string = "https://fakestoreapi.com/products"
+const fetchData =(urlParam : string) : void => {
+    const url : string = urlParam 
     fetch(url)
     .then (res=>res.json())
     .then (data  => {
-        data.map((el : Product) => displayData(el))
+        clearPrevious("resRender")
+        data.map((el : Product) => displayData(el));
+        
     })
+    .then( function() {
+        eventListnnerCart()
+    } )
     .catch(err => console.log(err))
 }
-const clearPrevious=() : void  => {
-    let myRender=document.querySelector(".resRender") as HTMLDivElement;
-    myRender.innerHTML="";
-}
 
-document.body.onload=fetchData; 
+// const fetchCategories=():void => {
+//     let myCategories = document.querySelector("#categorieFilter") as HTMLSelectElement; 
+//     let myCategValue=myCategories.value;
+//     if (myCategValue!="all") {
+//         let myUrl = `https://fakestoreapi.com/products/category/${parser(myCategValue)}`;
+//         fetchData(myUrl);
+//     }
+//     else {
+//         fetchData("https://fakestoreapi.com/products")
+//     }
+// }
+// const parser=(url : string) : string => {
+//     return url.replace(" ","%20")
+// }
+
+
+
+//Calls 
+document.body.onload= () : void => {
+    fetchData("https://fakestoreapi.com/products");
+    initLocal();
+    displayCart(JSON.parse(localStorage.cart));
+}; 
 let myCategories = document.querySelector("#categories") as HTMLParagraphElement; 
 myCategories.addEventListener("click",() : void => {
     let myList = document.querySelector(".categories") as HTMLUListElement ;
     myList.classList.toggle("hidden");
 })
+const eventListnnerCart=() :void => {
+    let myAddToCart=document.querySelectorAll(".addToCart") ; 
+    myAddToCart.forEach(el=> {
+        el.addEventListener("click", (el) => {
+            setLocal(el.target)
+        })
+    })
+}
+//CART TOGGLE ; 
+    const myCart=document.querySelector(".cart"); 
+    const myCartToggler=document.querySelector(".cartToggler")
+    myCartToggler?.addEventListener("click",() => {
+        myCart?.classList.toggle("hidden")
+    })
+
+
