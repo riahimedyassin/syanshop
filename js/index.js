@@ -1,3 +1,4 @@
+var _a;
 import { clearPrevious } from "./ClearPrevious.js";
 import { initLocal } from "./LocalStorage.js";
 import { displayCart, setLocal } from "./Cart.js";
@@ -37,21 +38,24 @@ var fetchData = function (urlParam) {
         eventListnnerCart();
     })["catch"](function (err) { return console.log(err); });
 };
-// const fetchCategories=():void => {
-//     let myCategories = document.querySelector("#categorieFilter") as HTMLSelectElement; 
-//     let myCategValue=myCategories.value;
-//     if (myCategValue!="all") {
-//         let myUrl = `https://fakestoreapi.com/products/category/${parser(myCategValue)}`;
-//         fetchData(myUrl);
-//     }
-//     else {
-//         fetchData("https://fakestoreapi.com/products")
-//     }
-// }
-// const parser=(url : string) : string => {
-//     return url.replace(" ","%20")
-// }
+var fetchCategories = function () {
+    var myCategories = document.querySelector("#categorieFilter");
+    var myCategValue = myCategories.value;
+    if (myCategValue != "all") {
+        var myUrl = "https://fakestoreapi.com/products/category/".concat(parser(myCategValue));
+        fetchData(myUrl);
+    }
+    else {
+        fetchData("https://fakestoreapi.com/products");
+    }
+};
+var parser = function (url) {
+    return url.replace(" ", "%20");
+};
 //Calls 
+(_a = document.querySelector("#categorieFilter")) === null || _a === void 0 ? void 0 : _a.addEventListener("change", function () {
+    fetchCategories();
+});
 document.body.onload = function () {
     fetchData("https://fakestoreapi.com/products");
     initLocal();

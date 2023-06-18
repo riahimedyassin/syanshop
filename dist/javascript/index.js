@@ -1,3 +1,4 @@
+var _a;
 import { clearPrevious } from "./ClearPrevious.js";
 import { initLocal } from "./LocalStorage.js";
 import { displayCart, setLocal } from "./Cart.js";
@@ -38,21 +39,24 @@ const fetchData = (urlParam) => {
     })
         .catch(err => console.log(err));
 };
-// const fetchCategories=():void => {
-//     let myCategories = document.querySelector("#categorieFilter") as HTMLSelectElement; 
-//     let myCategValue=myCategories.value;
-//     if (myCategValue!="all") {
-//         let myUrl = `https://fakestoreapi.com/products/category/${parser(myCategValue)}`;
-//         fetchData(myUrl);
-//     }
-//     else {
-//         fetchData("https://fakestoreapi.com/products")
-//     }
-// }
-// const parser=(url : string) : string => {
-//     return url.replace(" ","%20")
-// }
+const fetchCategories = () => {
+    let myCategories = document.querySelector("#categorieFilter");
+    let myCategValue = myCategories.value;
+    if (myCategValue != "all") {
+        let myUrl = `https://fakestoreapi.com/products/category/${parser(myCategValue)}`;
+        fetchData(myUrl);
+    }
+    else {
+        fetchData("https://fakestoreapi.com/products");
+    }
+};
+const parser = (url) => {
+    return url.replace(" ", "%20");
+};
 //Calls 
+(_a = document.querySelector("#categorieFilter")) === null || _a === void 0 ? void 0 : _a.addEventListener("change", () => {
+    fetchCategories();
+});
 document.body.onload = () => {
     fetchData("https://fakestoreapi.com/products");
     initLocal();
