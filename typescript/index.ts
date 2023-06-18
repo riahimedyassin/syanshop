@@ -42,24 +42,27 @@ const fetchData =(urlParam : string) : void => {
     .catch(err => console.log(err))
 }
 
-// const fetchCategories=():void => {
-//     let myCategories = document.querySelector("#categorieFilter") as HTMLSelectElement; 
-//     let myCategValue=myCategories.value;
-//     if (myCategValue!="all") {
-//         let myUrl = `https://fakestoreapi.com/products/category/${parser(myCategValue)}`;
-//         fetchData(myUrl);
-//     }
-//     else {
-//         fetchData("https://fakestoreapi.com/products")
-//     }
-// }
-// const parser=(url : string) : string => {
-//     return url.replace(" ","%20")
-// }
+const fetchCategories=():void => {
+    let myCategories = document.querySelector("#categorieFilter") as HTMLSelectElement; 
+    let myCategValue=myCategories.value;
+    if (myCategValue!="all") {
+        let myUrl = `https://fakestoreapi.com/products/category/${parser(myCategValue)}`;
+        fetchData(myUrl);
+    }
+    else {
+        fetchData("https://fakestoreapi.com/products")
+    }
+}
+const parser=(url : string) : string => {
+    return url.replace(" ","%20")
+}
 
 
 
 //Calls 
+document.querySelector("#categorieFilter")?.addEventListener("change",() => {
+    fetchCategories();
+})
 document.body.onload= () : void => {
     fetchData("https://fakestoreapi.com/products");
     initLocal();

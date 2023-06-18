@@ -37,3 +37,12 @@ export const setLocal = (event) => {
         }
     }
 };
+export const deleteLocal = (event) => {
+    if (event.parentElement) {
+        const myLocal = getLocal();
+        const id = event.parentElement.getAttribute("id");
+        const test = myLocal.some(el => {
+            el.id == id;
+        });
+    }
+};
